@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+	<Id>89a29e91-72f2-4cc3-92c7-10fedb746b8c</Id>
+	<Version>1.0.0.0</Version>
+	<ProviderName>Fabian Wespi</ProviderName>
+	<DefaultLocale>en-US</DefaultLocale>
+	<DisplayName DefaultValue="Egyptological Unicode Converter" />
+	<Description DefaultValue="Converts Latin to Egyptological, Coptic, and Greek Unicode characters." />
+	<IconUrl DefaultValue="https://fwespi.github.io/src/icons/Icon-96.png" />
+	
+	<Hosts>
+		<Host Name="Document"/>
+	</Hosts>
+	<DefaultSettings>
+		<SourceLocation DefaultValue="https://fwespi.github.io/src/main.html" />
+	</DefaultSettings>
+	
+	<Permissions>ReadWriteDocument</Permissions>
+	
+	<VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">   
+		<Hosts>
+			<Host xsi:type="Document">
+				<DesktopFormFactor>
+					
+					<FunctionFile resid="FunctionFile.Url" />
+					
+					<ExtensionPoint xsi:type="PrimaryCommandSurface">
+						<OfficeTab id="TabHome">
+							<Group id="Group">
+								<Label resid="GroupLabel" />
+								
+								<Icon>
+									<bt:Image size="16" resid="Group.Icon.16" />
+									<bt:Image size="32" resid="Group.Icon.32" />
+									<bt:Image size="80" resid="Group.Icon.80" />
+									<bt:Image size="96" resid="Group.Icon.96" />
+								</Icon>
+								
+								<Control xsi:type="Button" id="TransliterationButton">
+									<Label resid="TransliterationButton.Label" />
+									<Supertip>
+										<Title resid="TransliterationButton.Label" />
+										<Description resid="TransliterationButton.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="TransliterationButton.Icon.16" />
+										<bt:Image size="32" resid="TransliterationButton.Icon.32" />
+										<bt:Image size="80" resid="TransliterationButton.Icon.80" />
+										<bt:Image size="96" resid="TransliterationButton.Icon.96" />
+									</Icon>
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>convertTransliteration</FunctionName>
+									</Action>
+								</Control>
+								
+								<Control xsi:type="Button" id="CopticButton">
+									<Label resid="CopticButton.Label" />
+									<Supertip>
+										<Title resid="CopticButton.Label" />
+										<Description resid="CopticButton.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="CopticButton.Icon.16" />
+										<bt:Image size="32" resid="CopticButton.Icon.32" />
+										<bt:Image size="80" resid="CopticButton.Icon.80" />
+										<bt:Image size="96" resid="CopticButton.Icon.96" />
+									</Icon>
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>convertCoptic</FunctionName>
+									</Action>
+								</Control>
+								
+								<Control xsi:type="Button" id="GreekButton">
+									<Label resid="GreekButton.Label" />
+									<Supertip>
+										<Title resid="GreekButton.Label" />
+										<Description resid="GreekButton.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="GreekButton.Icon.16" />
+										<bt:Image size="32" resid="GreekButton.Icon.32" />
+										<bt:Image size="80" resid="GreekButton.Icon.80" />
+										<bt:Image size="96" resid="GreekButton.Icon.96" />
+									</Icon>
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>convertGreek</FunctionName>
+									</Action>
+								</Control>
+								
+								<Control xsi:type="Button" id="TaskpaneButton">
+									<Label resid="TaskpaneButton.Label" />
+									<Supertip>
+										<Title resid="TaskpaneButton.Label" />
+										<Description resid="TaskpaneButton.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="Group.Icon.16" />
+										<bt:Image size="32" resid="Group.Icon.32" />
+										<bt:Image size="80" resid="Group.Icon.80" />
+										<bt:Image size="96" resid="Group.Icon.96" />
+									</Icon>
+									<Action xsi:type="ShowTaskpane">
+										<TaskpaneId>TaskpaneId1</TaskpaneId>
+										<SourceLocation resid="FunctionFile.Url" />
+									</Action>
+								</Control>
+								
+							</Group>
+						</OfficeTab>
+					</ExtensionPoint>
+				</DesktopFormFactor>
+			</Host>
+		</Hosts>
+		<Resources>
+		
+			<bt:Urls>
+				<bt:Url id="FunctionFile.Url" DefaultValue="https://fwespi.github.io/src/main.html" />
+			</bt:Urls>
+			
+			<bt:Images>
+				<bt:Image id="Group.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Icon-16.png" />
+				<bt:Image id="Group.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Icon-32.png" />
+				<bt:Image id="Group.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Icon-80.png" />
+				<bt:Image id="Group.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Icon-96.png" />
+				
+				<bt:Image id="TransliterationButton.Icon.16" DefaultValue="https://fwespi.github.io/src/Transliteration-16.png" />
+				<bt:Image id="TransliterationButton.Icon.32" DefaultValue="https://fwespi.github.io/src/Transliteration-32.png" />
+				<bt:Image id="TransliterationButton.Icon.80" DefaultValue="https://fwespi.github.io/src/Transliteration-80.png" />
+				<bt:Image id="TransliterationButton.Icon.96" DefaultValue="https://fwespi.github.io/src/Transliteration-96.png" />
+				
+				<bt:Image id="CopticButton.Icon.16" DefaultValue="https://fwespi.github.io/src/Coptic-16.png" />
+				<bt:Image id="CopticButton.Icon.32" DefaultValue="https://fwespi.github.io/src/Coptic-32.png" />
+				<bt:Image id="CopticButton.Icon.80" DefaultValue="https://fwespi.github.io/src/Coptic-80.png" />
+				<bt:Image id="CopticButton.Icon.96" DefaultValue="https://fwespi.github.io/src/Coptic-96.png" />
+				
+				<bt:Image id="GreekButton.Icon.16" DefaultValue="https://fwespi.github.io/src/Greek-16.png" />
+				<bt:Image id="GreekButton.Icon.32" DefaultValue="https://fwespi.github.io/src/Greek-32.png" />
+				<bt:Image id="GreekButton.Icon.80" DefaultValue="https://fwespi.github.io/src/Greek-80.png" />
+				<bt:Image id="GreekButton.Icon.96" DefaultValue="https://fwespi.github.io/src/Greek-96.png" />
+			</bt:Images>
+			
+			<bt:ShortStrings>
+				<bt:String id="GroupLabel" DefaultValue="Egyptological Unicode Converter" />
+				<bt:String id="TransliterationButton.Label" DefaultValue="Transliteration" />
+				<bt:String id="CopticButton.Label" DefaultValue="Coptic" />
+				<bt:String id="GreekButton.Label" DefaultValue="Greek" />
+				<bt:String id="TaskpaneButton.Label" DefaultValue="Info" />
+			</bt:ShortStrings>
+			
+			<bt:LongStrings>
+				<bt:String id="TransliterationButton.Tooltip" DefaultValue="Convert selected text to Egyptological Unicode characters." />
+				<bt:String id="CopticButton.Tooltip" DefaultValue="Convert selected text to Coptic Unicode characters." />
+				<bt:String id="GreekButton.Tooltip" DefaultValue="Convert selected text to Greek Unicode characters." />
+				<bt:String id="TaskpaneButton.Tooltip" DefaultValue="How to use the converter." />
+			</bt:LongStrings>
+			
+		</Resources>
+	</VersionOverrides>
+</OfficeApp>
