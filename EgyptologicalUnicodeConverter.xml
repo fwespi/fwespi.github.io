@@ -123,20 +123,20 @@
 				<bt:Image id="Group.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Icon-80.png" />
 				<bt:Image id="Group.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Icon-96.png" />
 				
-				<bt:Image id="TransliterationButton.Icon.16" DefaultValue="https://fwespi.github.io/src/Transliteration-16.png" />
-				<bt:Image id="TransliterationButton.Icon.32" DefaultValue="https://fwespi.github.io/src/Transliteration-32.png" />
-				<bt:Image id="TransliterationButton.Icon.80" DefaultValue="https://fwespi.github.io/src/Transliteration-80.png" />
-				<bt:Image id="TransliterationButton.Icon.96" DefaultValue="https://fwespi.github.io/src/Transliteration-96.png" />
+				<bt:Image id="TransliterationButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-16.png" />
+				<bt:Image id="TransliterationButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-32.png" />
+				<bt:Image id="TransliterationButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-80.png" />
+				<bt:Image id="TransliterationButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-96.png" />
 				
-				<bt:Image id="CopticButton.Icon.16" DefaultValue="https://fwespi.github.io/src/Coptic-16.png" />
-				<bt:Image id="CopticButton.Icon.32" DefaultValue="https://fwespi.github.io/src/Coptic-32.png" />
-				<bt:Image id="CopticButton.Icon.80" DefaultValue="https://fwespi.github.io/src/Coptic-80.png" />
-				<bt:Image id="CopticButton.Icon.96" DefaultValue="https://fwespi.github.io/src/Coptic-96.png" />
+				<bt:Image id="CopticButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Coptic-16.png" />
+				<bt:Image id="CopticButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Coptic-32.png" />
+				<bt:Image id="CopticButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Coptic-80.png" />
+				<bt:Image id="CopticButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Coptic-96.png" />
 				
-				<bt:Image id="GreekButton.Icon.16" DefaultValue="https://fwespi.github.io/src/Greek-16.png" />
-				<bt:Image id="GreekButton.Icon.32" DefaultValue="https://fwespi.github.io/src/Greek-32.png" />
-				<bt:Image id="GreekButton.Icon.80" DefaultValue="https://fwespi.github.io/src/Greek-80.png" />
-				<bt:Image id="GreekButton.Icon.96" DefaultValue="https://fwespi.github.io/src/Greek-96.png" />
+				<bt:Image id="GreekButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Greek-16.png" />
+				<bt:Image id="GreekButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Greek-32.png" />
+				<bt:Image id="GreekButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Greek-80.png" />
+				<bt:Image id="GreekButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Greek-96.png" />
 			</bt:Images>
 			
 			<bt:ShortStrings>
