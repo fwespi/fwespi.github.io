@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8" />
+		
+		<title>Egyptological Unicode Converter</title>
+		
+		<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+		<script src="./utilities/main.js" type="text/javascript"></script>
+		
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+Coptic&display=swap');
+			
+			* {
+				margin: 0;
+				padding: 0;
+				color: #3a3a38;
+				font-family: 'Roboto', Helvetica, Arial, 'Noto Sans Coptic','Noto Sans Display', sans-serif;
+			}
+			header {
+				padding: 1rem; 
+				background: #f8db8f;
+				box-shadow: 1px 1px 7px #ccc;
+			}
+			h1 {
+				color: #ed8733;
+			}
+			h2, h3, p, li, td {
+				padding: 1rem;
+				line-height: 1.8;
+			}
+			td {
+				line-height: unset;
+				padding-bottom: 0;
+				font-family: 'Noto Sans Coptic','Noto Sans Display', 'Roboto', Helvetica, Arial, sans-serif;
+			}
+			.smaller {
+				font-size: 0.8em;
+			}
+			hr {
+				border: 1px solid #ccc;
+			}
+			ol img, p img {
+				height: 1.2em;
+				border: 1px solid #ccc;
+				margin-left: 0.5em;
+				margin-right: 0.2em;
+				cursor: pointer;
+			}
+			header img {
+				height: 60px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="./icons/Icon-96.png"/> 
+			<h1>Egyptological Unicode Converter</h1>
+		</header>
+
+		<p>The Egyptological Unicode Converter is a Microsoft Word add-in that converts text in beta code to proper Egyptological, Coptic, and Greek Unicode characters.</p>
+		
+		<h2>How to use</h2>
+		<ol>
+			<li>In Word, select some text written in Egyptological, Coptic, or Greek beta code.</li>
+			<li>Choose either the 
+				<br><img src="./icons/Transliteration-32.png" onclick="convertTransliteration()"/> <b>Transliteration</b>, 
+				<br><img src="./icons/Coptic-32.png" onclick="convertCoptic()"/> <b>Coptic</b>, or 
+				<br><img src="./icons/Greek-32.png" onclick="convertGreek()"/> <b>Greek</b> 
+				<br>button in the ribbon in order to convert the beta code into the proper Unicode characters.
+				<br><br>Note that a font covering the required Unicode characters must be installed for the characters to be displayed correctly.
+			</li>
+		</ol>
+		<hr></hr>
+
+		<p>For example, if your input is 
+			<br><b>sXA</b> 
+			<br>and you choose the 
+			<img src="./icons/Transliteration-32.png"/> button, 
+			<b>sXA</b> will be replaced by<br> <b>sẖꜣ</b>.
+		</p>
+
+		<hr></hr>
+
+		<h3>Special rules for Egyptological Transliteration</h3>
+		<ul>
+			<li>Use an exclamation mark to avoid replacement:
+				<br>e.g. <b>a!</b> → <b>a</b>, while <b>a</b> → <b>ꜥ</b>
+			</li>
+			<li>Use an asterix to choose allographs of <b>ỉ ṯ d ḏ</b>:
+				<br><b>i*</b> and <b>I*</b> → <b>ꞽ</b> and <b>Ꞽ</b> instead of <b>ỉ</b> and <b>Ỉ</b>
+				<br><b>T*</b> → <b>č</b> instead of <b>ṯ</b>
+				<br><b>d*</b> → <b>ṭ</b> instead of <b>d</b>
+				<br><b>D*</b> → <b>č̣</b> instead of <b>ḏ</b>
+			</li>
+			<li>Use the plus sign to make a character uppercase: 
+				<br>e.g. <b>X+</b> → <b>H̱</b>, while <b>X</b> → <b>ẖ</b>
+			</li>
+		</ul>
+		
+		<h3>Special rules for Coptic</h3>
+		<ul>
+			<li>Use the plus sign to make a character uppercase: 
+				<br>e.g. <b>D+</b> → <b>Ϫ</b>
+			</li>
+		</ul>
+		
+		<h3>Special rules for Greek</h3>
+		<ul>
+			<li>Greek diacritics are indicated by:<br>
+				• spiritus lenis: <b>)</b><br>
+				• spiritus asper: <b>(</b><br>
+				• acute: <b>/</b><br>
+				• gravis: <b>\</b><br>
+				• circumflex: <b>=</b><br>
+				• trema: <b>+</b><br>
+				• iota subscriptum: <b>|</b>
+			</li>
+		</ul>
+
+		<h2>Character Mapping</h2>
+		<h3>Egyptological transliteration</h3>
+		<table>
+			<tr><td>A</td><td>→</td><td>ꜣ</td></tr>
+			<tr><td>'</td><td>→</td><td>ʾ</td></tr>
+			<tr><td>#</td><td>→</td><td>a</td></tr>
+			<tr><td>i</td><td>→</td><td>ỉ</td></tr>
+			<tr><td>j</td><td>→</td><td>i̯</td></tr>
+			<tr><td>a</td><td>→</td><td>ꜥ</td></tr>
+			<tr><td>w</td><td>→</td><td>w</td></tr>
+			<tr><td>b</td><td>→</td><td>b</td></tr>
+			<tr><td>p</td><td>→</td><td>p</td></tr>
+			<tr><td>f</td><td>→</td><td>f</td></tr>
+			<tr><td>m</td><td>→</td><td>m</td></tr>
+			<tr><td>n</td><td>→</td><td>n</td></tr>
+			<tr><td>r</td><td>→</td><td>r</td></tr>
+			<tr><td>l</td><td>→</td><td>l</td></tr>
+			<tr><td>h</td><td>→</td><td>h</td></tr>
+			<tr><td>H</td><td>→</td><td>ḥ</td></tr>
+			<tr><td>x</td><td>→</td><td>ḫ</td></tr>
+			<tr><td>V</td><td>→</td><td>h̭</td></tr>
+			<tr><td>X</td><td>→</td><td>ẖ</td></tr>
+			<tr><td>s</td><td>→</td><td>s</td></tr>
+			<tr><td>$</td><td>→</td><td>ś</td></tr>
+			<tr><td>S</td><td>→</td><td>š</td></tr>
+			<tr><td>q</td><td>→</td><td>ḳ</td></tr>
+			<tr><td>k</td><td>→</td><td>k</td></tr>
+			<tr><td>g</td><td>→</td><td>g</td></tr>
+			<tr><td>t</td><td>→</td><td>t</td></tr>
+			<tr><td>v</td><td>→</td><td>ṱ</td></tr>
+			<tr><td>T</td><td>→</td><td>ṯ</td></tr>
+			<tr><td>d</td><td>→</td><td>d</td></tr>
+			<tr><td>D</td><td>→</td><td>ḏ</td></tr>
+			<tr><td>=</td><td>→</td><td>⸗</td></tr>
+			<tr><td>&</td><td>→</td><td>⸢</td></tr>
+			<tr><td>\\</td><td>→</td><td>⸣</td></tr>
+		</table>
+
+		<h3>Coptic</h3>
+		<table>
+			<tr><td>a</td><td>→</td><td>ⲁ</td></tr>
+			<tr><td>b</td><td>→</td><td>ⲃ</td></tr>
+			<tr><td>g</td><td>→</td><td>ⲅ</td></tr>
+			<tr><td>d</td><td>→</td><td>ⲇ</td></tr>
+			<tr><td>e</td><td>→</td><td>ⲉ</td></tr>
+			<tr><td>Z</td><td>→</td><td>ⲋ</td></tr>
+			<tr><td>z</td><td>→</td><td>ⲍ</td></tr>
+			<tr><td>h</td><td>→</td><td>ⲏ</td></tr>
+			<tr><td>j</td><td>→</td><td>ⲑ</td></tr>
+			<tr><td>i</td><td>→</td><td>ⲓ</td></tr>
+			<tr><td>k</td><td>→</td><td>ⲕ</td></tr>
+			<tr><td>l</td><td>→</td><td>ⲗ</td></tr>
+			<tr><td>m</td><td>→</td><td>ⲙ</td></tr>
+			<tr><td>n</td><td>→</td><td>ⲛ</td></tr>
+			<tr><td>X</td><td>→</td><td>ⲝ</td></tr>
+			<tr><td>o</td><td>→</td><td>ⲟ</td></tr>
+			<tr><td>p</td><td>→</td><td>ⲡ</td></tr>
+			<tr><td>r</td><td>→</td><td>ⲣ</td></tr>
+			<tr><td>s</td><td>→</td><td>ⲥ</td></tr>
+			<tr><td>t</td><td>→</td><td>ⲧ</td></tr>
+			<tr><td>y</td><td>→</td><td>ⲩ</td></tr>
+			<tr><td>F</td><td>→</td><td>ⲫ</td></tr>
+			<tr><td>x</td><td>→</td><td>ⲭ</td></tr>
+			<tr><td>Y</td><td>→</td><td>ⲯ</td></tr>
+			<tr><td>w</td><td>→</td><td>ⲱ</td></tr>
+			<tr><td>W</td><td>→</td><td>ϣ</td></tr>
+			<tr><td>f</td><td>→</td><td>ϥ</td></tr>
+			<tr><td>H</td><td>→</td><td>ϩ</td></tr>
+			<tr><td>q</td><td>→</td><td>ϧ</td></tr>
+			<tr><td>D</td><td>→</td><td>ϫ</td></tr>
+			<tr><td>K</td><td>→</td><td>ϭ</td></tr>
+			<tr><td>T</td><td>→</td><td>ϯ</td></tr>
+			<tr><td>_</td><td>→</td><td>̅</td></tr>
+		</table>
+		
+		<h3>Greek</h3>
+		<table>
+			<tr><td>a</td><td>→</td><td>α</td></tr>
+			<tr><td>b</td><td>→</td><td>β</td></tr>
+			<tr><td>g</td><td>→</td><td>γ</td></tr>
+			<tr><td>d</td><td>→</td><td>δ</td></tr>
+			<tr><td>e</td><td>→</td><td>ε</td></tr>
+			<tr><td>z</td><td>→</td><td>ζ</td></tr>
+			<tr><td>h</td><td>→</td><td>η</td></tr>
+			<tr><td>q</td><td>→</td><td>θ</td></tr>
+			<tr><td>i</td><td>→</td><td>ι</td></tr>
+			<tr><td>I</td><td>→</td><td>Ι</td></tr>
+			<tr><td>k</td><td>→</td><td>κ</td></tr>
+			<tr><td>l</td><td>→</td><td>λ</td></tr>
+			<tr><td>m</td><td>→</td><td>μ</td></tr>
+			<tr><td>n</td><td>→</td><td>ν</td></tr>
+			<tr><td>c</td><td>→</td><td>ξ</td></tr>
+			<tr><td>o</td><td>→</td><td>ο</td></tr>
+			<tr><td>p</td><td>→</td><td>π</td></tr>
+			<tr><td>r</td><td>→</td><td>ρ</td></tr>
+			<tr><td>s</td><td>→</td><td>σ</td></tr>
+			<tr><td>j</td><td>→</td><td>ς</td></tr>
+			<tr><td>c</td><td>→</td><td>ϲ</td></tr>
+			<tr><td>t</td><td>→</td><td>τ</td></tr>
+			<tr><td>u</td><td>→</td><td>υ</td></tr>
+			<tr><td>f</td><td>→</td><td>φ</td></tr>
+			<tr><td>x</td><td>→</td><td>χ</td></tr>
+			<tr><td>y</td><td>→</td><td>ψ</td></tr>
+			<tr><td>w</td><td>→</td><td>ω</td></tr>
+			<tr><td>W*</td><td>→</td><td>Ꞷ</td></tr>
+			<tr><td>:</td><td>→</td><td>·</td></tr>
+			<tr><td>;</td><td>→</td><td>·</td></tr>
+			<tr><td>?</td><td>→</td><td>;</td></tr>
+		</table>
+
+		<hr></hr>
+	</body>
+</html>
