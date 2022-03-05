@@ -23,7 +23,7 @@ The Egyptological Unicode Converter is a Microsoft Word add-in that converts tex
 ## How to use
 1) In Word, select some text written in Egyptological, Coptic, or Greek beta code.
 2) Choose either the \
-![Image](./src/icons/TransliterationIcon-96.png) **Transliteration**, \
+![Image](./src/icons/Transliteration-96.png | width=20) **Transliteration**, \
 ![Image](./src/icons/Coptic-96.png) **Coptic**, or \
 ![Image](./src/icons/Greek-96.png) **Greek** \
 button in the ribbon in order to convert the beta code into the proper Unicode characters.\
@@ -45,7 +45,7 @@ and you choose the \
 - Use an exclamation mark to avoid replacement: \
 e.g. **a!** → **a**, while **a** → **ꜥ**
 - Use an asterix to choose allographs of **ỉ ṯ d ḏ**:\
-**i\*** and ** I\***→ **ꞽ** and **Ꞽ** instead of **ỉ** and **Ỉ**\
+**i\*** and __I\*__→ **ꞽ** and **Ꞽ** instead of **ỉ** and **Ỉ**\
 **T\*** → **č** instead of **ṯ**\
 **d\***→ **ṭ** instead of **d**\
 **D\*** → **č̣** instead of **ḏ**
