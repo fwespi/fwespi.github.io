@@ -13,8 +13,8 @@ function substituteCharacters (event, mapping) {
 			for(let i = 0; i < results.items.length; i++) {
 				results.items[i].insertText(mapping[n][1], "replace");
 			};
-			await context.sync();
 		};
+		await context.sync();
 	});
 	
 	if(event)
