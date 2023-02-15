@@ -10,7 +10,7 @@ function substituteCharacters (event, mapping) {
 		
 		let txt = selection.text;
 		for(let n=0; n<mapping.length; n++){
-			txt.replaceAll(mapping[n][0], mapping[n][1])
+			txt = txt.replaceAll(mapping[n][0], mapping[n][1])
 		}
 		selection.insertText(txt, "replace");
 		
