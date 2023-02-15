@@ -16,6 +16,9 @@ function substituteCharacters (event, mapping) {
 		
 		await context.sync();
 	});
+	
+	if(event)
+		event.completed();
 };
 
 async function convertTransliteration (event) {
