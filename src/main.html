@@ -51,18 +51,20 @@
 		</style>
 	</head>
 	<body>
+	<button onclick="addImage()">img</button>
 		<header>
 			<img src="./icons/Icon-96.png"/> 
 			<h1>Egyptological Unicode Converter</h1>
 		</header>
 
-		<p>The Egyptological Unicode Converter is a Microsoft Word add-in that converts text in beta code to proper Egyptological, Coptic, and Greek Unicode characters.</p>
+		<p>The Egyptological Unicode Converter is a Microsoft Word add-in that converts text in beta code to proper Egyptological, Hieroglyphic, Coptic, and Greek Unicode characters.</p>
 		
 		<h2>How to use</h2>
 		<ol>
-			<li>In Word, select some text written in Egyptological, Coptic, or Greek beta code.</li>
+			<li>In Word, select some text written in Egyptological, Hieroglyphic, Coptic, or Greek beta code.</li>
 			<li>Choose either the 
 				<br><img src="./icons/Transliteration-80.png" onclick="convertTransliteration()"/> <b>Transliteration</b>, 
+				<br><img src="./icons/Hiero-80.png" onclick="convertHieroglyphs()"/> <b>Hieroglyphs</b>, 
 				<br><img src="./icons/Coptic-80.png" onclick="convertCoptic()"/> <b>Coptic</b>, or 
 				<br><img src="./icons/Greek-80.png" onclick="convertGreek()"/> <b>Greek</b> 
 				<br>button in the ribbon in order to convert the beta code into the proper Unicode characters.
