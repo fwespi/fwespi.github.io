@@ -3,7 +3,7 @@
 
 > Fabian Wespi
 
-The Egyptological Unicode Converter is a Microsoft Word add-in that converts text in beta code to proper Egyptological, Coptic, and Greek Unicode characters.
+The Egyptological Unicode Converter is a Microsoft Word add-in that converts text in beta code to proper Egyptological, Hieroglyphic, Coptic, and Greek Unicode characters.
 
 ## Supported platforms
 - Office 2019 or later
@@ -24,6 +24,7 @@ The Egyptological Unicode Converter is a Microsoft Word add-in that converts tex
 1) In Word, select some text written in Egyptological, Coptic, or Greek beta code.
 2) Choose either the \
 <img src="./src/icons/Transliteration-80.png" height="20"/> **Transliteration**, \
+<img src="./src/icons/Hiero-80.png" height="20"/> **Hieroglyphs**, \
 <img src="./src/icons/Coptic-80.png" height="20"/> **Coptic**, or \
 <img src="./src/icons/Greek-80.png" height="20"/> **Greek** \
 button in the ribbon in order to convert the beta code into the proper Unicode characters.\

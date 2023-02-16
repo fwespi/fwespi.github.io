@@ -53,6 +53,23 @@
 									</Action>
 								</Control>
 								
+								<Control xsi:type="Button" id="HieroButton">
+									<Label resid="HieroButton.Label" />
+									<Supertip>
+										<Title resid="HieroButton.Label" />
+										<Description resid="HieroButton.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="HieroButton.Icon.16" />
+										<bt:Image size="32" resid="HieroButton.Icon.32" />
+										<bt:Image size="80" resid="HieroButton.Icon.80" />
+										<bt:Image size="96" resid="HieroButton.Icon.96" />
+									</Icon>
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>convertHieroglyphs</FunctionName>
+									</Action>
+								</Control>
+								
 								<Control xsi:type="Button" id="CopticButton">
 									<Label resid="CopticButton.Label" />
 									<Supertip>
@@ -143,6 +160,23 @@
 										</Action>
 									</Item>
 									
+									<Item id="Hieroglyphs">
+										<Label resid="HieroButton.Label"/>
+										<Supertip>
+											<Title resid="HieroButton.Label"/>
+											<Description resid="HieroButton.Tooltip"/>
+										</Supertip>
+										<Icon>
+											<bt:Image size="16" resid="HieroButton.Icon.16"/>
+											<bt:Image size="32" resid="HieroButton.Icon.32"/>
+											<bt:Image size="80" resid="HieroButton.Icon.80"/>
+											<bt:Image size="96" resid="HieroButton.Icon.96"/>
+										</Icon>
+										<Action xsi:type="ExecuteFunction">
+											<FunctionName>convertHieroglyphs</FunctionName>
+										</Action>
+									</Item>
+									
 									<Item id="Coptic">
 										<Label resid="CopticButton.Label"/>
 										<Supertip>
@@ -219,6 +253,11 @@
 				<bt:Image id="TransliterationButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-80.png" />
 				<bt:Image id="TransliterationButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-96.png" />
 				
+				<bt:Image id="HieroButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Hiero-16.png" />
+				<bt:Image id="HieroButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Hiero-32.png" />
+				<bt:Image id="HieroButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Hiero-80.png" />
+				<bt:Image id="HieroButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Hiero-96.png" />
+				
 				<bt:Image id="CopticButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Coptic-16.png" />
 				<bt:Image id="CopticButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Coptic-32.png" />
 				<bt:Image id="CopticButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Coptic-80.png" />
@@ -233,6 +272,7 @@
 			<bt:ShortStrings>
 				<bt:String id="GroupLabel" DefaultValue="Egyptological Unicode Converter" />
 				<bt:String id="TransliterationButton.Label" DefaultValue="Transliteration" />
+				<bt:String id="HieroButton.Label" DefaultValue="Hieroglyphs" />
 				<bt:String id="CopticButton.Label" DefaultValue="Coptic" />
 				<bt:String id="GreekButton.Label" DefaultValue="Greek" />
 				<bt:String id="TaskpaneButton.Label" DefaultValue="Info" />
@@ -241,6 +281,7 @@
 			<bt:LongStrings>
 				<bt:String id="GroupLabel.Descr" DefaultValue="Convert selected text to Egyptological Unicode characters." />
 				<bt:String id="TransliterationButton.Tooltip" DefaultValue="Convert selected text to Egyptological Unicode characters." />
+				<bt:String id="HieroButton.Tooltip" DefaultValue="Convert selected text to Hieroglyphic Unicode characters." />
 				<bt:String id="CopticButton.Tooltip" DefaultValue="Convert selected text to Coptic Unicode characters." />
 				<bt:String id="GreekButton.Tooltip" DefaultValue="Convert selected text to Greek Unicode characters." />
 				<bt:String id="TaskpaneButton.Tooltip" DefaultValue="How to use the converter." />
