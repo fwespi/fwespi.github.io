@@ -108,6 +108,97 @@
 							</Group>
 						</OfficeTab>
 					</ExtensionPoint>
+					
+					<ExtensionPoint xsi:type="ContextMenu">
+						 <OfficeMenu id="ContextMenuText">
+							<Control xsi:type="Menu" id="GroupLabel">
+								  <Label resid="GroupLabel" />
+								  <Supertip>
+									  <Title resid="GroupLabel" />
+									  <Description resid="GroupLabel.Descr" />
+								  </Supertip>
+								  <Icon>
+									 <bt:Image size="16" resid="Group.Icon.16"/>
+									 <bt:Image size="32" resid="Group.Icon.32"/>
+									 <bt:Image size="80" resid="Group.Icon.80"/>
+									 <bt:Image size="96" resid="Group.Icon.96"/>
+								  </Icon>
+								 
+								  <Items>
+								  
+									 <Item id="Transliteration">
+										<Label resid="TransliterationButton.Label"/>
+										<Supertip>
+											<Title resid="TransliterationButton.Label"/>
+											<Description resid="TaskpaneButton.Tooltip"/>
+										</Supertip>
+										<Icon>
+											<bt:Image size="16" resid="TransliterationButton.Icon.16"/>
+											<bt:Image size="32" resid="TransliterationButton.Icon.32"/>
+											<bt:Image size="80" resid="TransliterationButton.Icon.80"/>
+											<bt:Image size="96" resid="TransliterationButton.Icon.96"/>
+										</Icon>
+										<Action xsi:type="ExecuteFunction">
+											<FunctionName>convertTransliteration</FunctionName>
+										</Action>
+									</Item>
+									
+									<Item id="Coptic">
+										<Label resid="CopticButton.Label"/>
+										<Supertip>
+											<Title resid="CopticButton.Label"/>
+											<Description resid="CopticButton.Tooltip"/>
+										</Supertip>
+										<Icon>
+											<bt:Image size="16" resid="CopticButton.Icon.16"/>
+											<bt:Image size="32" resid="CopticButton.Icon.32"/>
+											<bt:Image size="80" resid="CopticButton.Icon.80"/>
+											<bt:Image size="96" resid="CopticButton.Icon.96"/>
+										</Icon>
+										<Action xsi:type="ExecuteFunction">
+											<FunctionName>convertCoptic</FunctionName>
+										</Action>
+									</Item>
+									
+									<Item id="Greek">
+										<Label resid="GreekButton.Label"/>
+										<Supertip>
+											<Title resid="GreekButton.Label"/>
+											<Description resid="GreekButton.Tooltip"/>
+										</Supertip>
+										<Icon>
+											<bt:Image size="16" resid="GreekButton.Icon.16"/>
+											<bt:Image size="32" resid="GreekButton.Icon.32"/>
+											<bt:Image size="80" resid="GreekButton.Icon.80"/>
+											<bt:Image size="96" resid="GreekButton.Icon.96"/>
+										</Icon>
+										<Action xsi:type="ExecuteFunction">
+											<FunctionName>convertGreek</FunctionName>
+										</Action>
+									</Item>
+									
+									<Item id="Taskpane">
+										<Label resid="TaskpaneButton.Label"/>
+										<Supertip>
+											<Title resid="TaskpaneButton.Label"/>
+											<Description resid="TaskpaneButton.Tooltip"/>
+										</Supertip>
+										<Icon>
+											<bt:Image size="16" resid="Group.Icon.16"/>
+											<bt:Image size="32" resid="Group.Icon.32"/>
+											<bt:Image size="80" resid="Group.Icon.80"/>
+											<bt:Image size="96" resid="Group.Icon.96"/>
+										</Icon>
+										<Action xsi:type="ShowTaskpane">
+											<SourceLocation resid="FunctionFile.Url" />
+										</Action>
+									</Item>
+									
+								  </Items>
+							</Control>         
+						  </OfficeMenu>
+					</ExtensionPoint>
+					
 				</DesktopFormFactor>
 			</Host>
 		</Hosts>
@@ -148,6 +239,7 @@
 			</bt:ShortStrings>
 			
 			<bt:LongStrings>
+				<bt:String id="GroupLabel.Descr" DefaultValue="Convert selected text to Egyptological Unicode characters." />
 				<bt:String id="TransliterationButton.Tooltip" DefaultValue="Convert selected text to Egyptological Unicode characters." />
 				<bt:String id="CopticButton.Tooltip" DefaultValue="Convert selected text to Coptic Unicode characters." />
 				<bt:String id="GreekButton.Tooltip" DefaultValue="Convert selected text to Greek Unicode characters." />
