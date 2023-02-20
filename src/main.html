@@ -19,15 +19,37 @@
 				padding: 1rem; 
 				background: #f8db8f;
 				box-shadow: 1px 1px 7px #ccc;
+				font-size: 1.2rem;
 			}
 			h1 {
 				color: #ed8733;
+				font-size: 1.2rem;
 			}
 			h2, h3, p, li, td {
 				padding: 1rem;
 				line-height: 1.8;
 			}
+			h2, h3 {
+				padding-bottom: 0;
+			}
+			h2{
+				font-size: 1.2rem;
+			}
+			h3{
+				font-size: 1.1rem;
+			}
+			p, li, td {
+				font-size: 0.9rem;
+			}
+			table {
+				border-collapse: collapse;
+				margin: 0.4rem;
+			}
+			tr:nth-child(2n) {
+				background: #fffaec;
+			}
 			td {
+				border: 1px solid #ccc;
 				line-height: unset;
 				padding-bottom: 0;
 				font-family: 'Noto Sans Coptic','Noto Sans Display', 'Roboto', Helvetica, Arial, sans-serif;
@@ -46,7 +68,38 @@
 				cursor: pointer;
 			}
 			header img {
-				height: 60px;
+				height: 3rem;
+			}
+			
+			#hieroglyphicInput {
+				position: relative;
+				margin-left: 1rem;
+			}
+			#hieroglyphicInput > div {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				background: #ffffff;
+				box-shadow: 1px 1px 2px #000000;
+				max-height: 10rem;
+				overflow-y:scroll;
+			}
+			#hieroglyphicInput > div:empty{
+				overflow-y: hidden
+			}
+			#hieroglyphicInput > div div{
+				padding: 0.3rem;
+			}
+			#hieroglyphicInput > div div.selected,
+			#hieroglyphicInput > div div:hover {
+				background: #f8db8f;
+				cursor: pointer;
+			}
+			#hieroglyphicInput span {
+				margin-right: 0.2rem;
+			}
+			#hieroglyphicInput span:nth-of-type(2) {
+				font-size: 0.8rem;
 			}
 		</style>
 	</head>
@@ -73,10 +126,10 @@
 		<hr></hr>
 
 		<p>For example, if your input is 
-			<br><b>sXA</b> 
-			<br>and you choose the 
+			<b>sXA</b> 
+			and you choose the 
 			<img src="./icons/Transliteration-80.png"/> button, 
-			<b>sXA</b> will be replaced by<br> <b>sẖꜣ</b>.
+			<b>sXA</b> will be replaced by <b>sẖꜣ</b>.
 		</p>
 
 		<hr></hr>
@@ -97,12 +150,16 @@
 			</li>
 		</ul>
 		
+		<hr></hr>
+		
 		<h3>Special rules for Coptic</h3>
 		<ul>
 			<li>Use the plus sign to make a character uppercase: 
 				<br>e.g. <b>D+</b> → <b>Ϫ</b>
 			</li>
 		</ul>
+		
+		<hr></hr>
 		
 		<h3>Special rules for Greek</h3>
 		<ul>
@@ -116,119 +173,83 @@
 				• iota subscriptum: <b>|</b>
 			</li>
 		</ul>
-
+		
+		<hr></hr>
+		
 		<h2>Character Mapping</h2>
+		<h3>Hieroglyphs</h3>
+		<p>Gardiner numbers are mapped to Egyptian Hieroglyphs Unicode characters.</p>
+		<p>Search Hieroglyphs by <b>phonetic value</b> or <b>Gardiner number</b> here:</p>
+		<div id="hieroglyphicInput" >
+			<input type="text" placeholder="search hieroglyph"/>
+			<div></div>
+		</div>
+		
 		<h3>Egyptological transliteration</h3>
 		<table>
-			<tr><td>A</td><td>→</td><td>ꜣ</td></tr>
-			<tr><td>'</td><td>→</td><td>ʾ</td></tr>
-			<tr><td>#</td><td>→</td><td>a</td></tr>
-			<tr><td>i</td><td>→</td><td>ỉ</td></tr>
-			<tr><td>j</td><td>→</td><td>i̯</td></tr>
-			<tr><td>a</td><td>→</td><td>ꜥ</td></tr>
-			<tr><td>w</td><td>→</td><td>w</td></tr>
-			<tr><td>b</td><td>→</td><td>b</td></tr>
-			<tr><td>p</td><td>→</td><td>p</td></tr>
-			<tr><td>f</td><td>→</td><td>f</td></tr>
-			<tr><td>m</td><td>→</td><td>m</td></tr>
-			<tr><td>n</td><td>→</td><td>n</td></tr>
-			<tr><td>r</td><td>→</td><td>r</td></tr>
-			<tr><td>l</td><td>→</td><td>l</td></tr>
-			<tr><td>h</td><td>→</td><td>h</td></tr>
-			<tr><td>H</td><td>→</td><td>ḥ</td></tr>
-			<tr><td>x</td><td>→</td><td>ḫ</td></tr>
-			<tr><td>V</td><td>→</td><td>h̭</td></tr>
-			<tr><td>X</td><td>→</td><td>ẖ</td></tr>
-			<tr><td>s</td><td>→</td><td>s</td></tr>
-			<tr><td>$</td><td>→</td><td>ś</td></tr>
-			<tr><td>S</td><td>→</td><td>š</td></tr>
-			<tr><td>q</td><td>→</td><td>ḳ</td></tr>
-			<tr><td>k</td><td>→</td><td>k</td></tr>
-			<tr><td>g</td><td>→</td><td>g</td></tr>
-			<tr><td>t</td><td>→</td><td>t</td></tr>
-			<tr><td>v</td><td>→</td><td>ṱ</td></tr>
-			<tr><td>T</td><td>→</td><td>ṯ</td></tr>
-			<tr><td>d</td><td>→</td><td>d</td></tr>
-			<tr><td>D</td><td>→</td><td>ḏ</td></tr>
-			<tr><td>=</td><td>→</td><td>⸗</td></tr>
-			<tr><td>&</td><td>→</td><td>⸢</td></tr>
-			<tr><td>\\</td><td>→</td><td>⸣</td></tr>
+			<tr><td><b>from</b></td><td><b>to</b></td><td></td><td><b>from</b></td><td><b>to</b></td></tr>
+			<tr><td>A</td><td>ꜣ</td><td></td><td>V</td><td>h̭</td></tr>
+			<tr><td>'</td><td>ʾ</td><td></td><td>X</td><td>ẖ</td></tr>
+			<tr><td>#</td><td>a</td><td></td><td>s</td><td>s</td></tr>
+			<tr><td>i</td><td>ỉ</td><td></td><td>$</td><td>ś</td></tr>
+			<tr><td>j</td><td>i̯</td><td></td><td>S</td><td>š</td></tr>
+			<tr><td>a</td><td>ꜥ</td><td></td><td>q</td><td>ḳ</td></tr>
+			<tr><td>w</td><td>w</td><td></td><td>k</td><td>k</td></tr>
+			<tr><td>b</td><td>b</td><td></td><td>g</td><td>g</td></tr>
+			<tr><td>p</td><td>p</td><td></td><td>t</td><td>t</td></tr>
+			<tr><td>f</td><td>f</td><td></td><td>v</td><td>ṱ</td></tr>
+			<tr><td>m</td><td>m</td><td></td><td>T</td><td>ṯ</td></tr>
+			<tr><td>n</td><td>n</td><td></td><td>d</td><td>d</td></tr>
+			<tr><td>r</td><td>r</td><td></td><td>D</td><td>ḏ</td></tr>
+			<tr><td>l</td><td>l</td><td></td><td>=</td><td>⸗</td></tr>
+			<tr><td>h</td><td>h</td><td></td><td>&amp;</td><td>⸢</td></tr>
+			<tr><td>H</td><td>ḥ</td><td></td><td>\\</td><td>⸣</td></tr>
+			<tr><td>x</td><td>ḫ</td></tr>
 		</table>
 
 		<h3>Coptic</h3>
 		<table>
-			<tr><td>a</td><td>→</td><td>ⲁ</td></tr>
-			<tr><td>b</td><td>→</td><td>ⲃ</td></tr>
-			<tr><td>g</td><td>→</td><td>ⲅ</td></tr>
-			<tr><td>d</td><td>→</td><td>ⲇ</td></tr>
-			<tr><td>e</td><td>→</td><td>ⲉ</td></tr>
-			<tr><td>Z</td><td>→</td><td>ⲋ</td></tr>
-			<tr><td>z</td><td>→</td><td>ⲍ</td></tr>
-			<tr><td>h</td><td>→</td><td>ⲏ</td></tr>
-			<tr><td>j</td><td>→</td><td>ⲑ</td></tr>
-			<tr><td>i</td><td>→</td><td>ⲓ</td></tr>
-			<tr><td>k</td><td>→</td><td>ⲕ</td></tr>
-			<tr><td>l</td><td>→</td><td>ⲗ</td></tr>
-			<tr><td>m</td><td>→</td><td>ⲙ</td></tr>
-			<tr><td>n</td><td>→</td><td>ⲛ</td></tr>
-			<tr><td>X</td><td>→</td><td>ⲝ</td></tr>
-			<tr><td>o</td><td>→</td><td>ⲟ</td></tr>
-			<tr><td>p</td><td>→</td><td>ⲡ</td></tr>
-			<tr><td>r</td><td>→</td><td>ⲣ</td></tr>
-			<tr><td>s</td><td>→</td><td>ⲥ</td></tr>
-			<tr><td>t</td><td>→</td><td>ⲧ</td></tr>
-			<tr><td>y</td><td>→</td><td>ⲩ</td></tr>
-			<tr><td>F</td><td>→</td><td>ⲫ</td></tr>
-			<tr><td>x</td><td>→</td><td>ⲭ</td></tr>
-			<tr><td>Y</td><td>→</td><td>ⲯ</td></tr>
-			<tr><td>w</td><td>→</td><td>ⲱ</td></tr>
-			<tr><td>W</td><td>→</td><td>ϣ</td></tr>
-			<tr><td>f</td><td>→</td><td>ϥ</td></tr>
-			<tr><td>H</td><td>→</td><td>ϩ</td></tr>
-			<tr><td>$</td><td>→</td><td>ⳉ</td></tr>
-			<tr><td>q</td><td>→</td><td>ϧ</td></tr>
-			<tr><td>D</td><td>→</td><td>ϫ</td></tr>
-			<tr><td>K</td><td>→</td><td>ϭ</td></tr>
-			<tr><td>T</td><td>→</td><td>ϯ</td></tr>
-			<tr><td>_</td><td>→</td><td>̅</td></tr>
-			<tr><td>=</td><td>→</td><td>⸗</td></tr>
-			<tr><td>&amp;</td><td>→</td><td>⸢</td></tr>
-			<tr><td>\</td><td>→</td><td>⸣</td></tr>
+			<tr><td><b>from</b></td><td><b>to</b></td><td></td><td><b>from</b></td><td><b>to</b></td></tr>
+			<tr><td>a</td><td>ⲁ</td><td></td><td>t</td><td>ⲧ</td></tr>
+			<tr><td>b</td><td>ⲃ</td><td></td><td>y</td><td>ⲩ</td></tr>
+			<tr><td>g</td><td>ⲅ</td><td></td><td>F</td><td>ⲫ</td></tr>
+			<tr><td>d</td><td>ⲇ</td><td></td><td>x</td><td>ⲭ</td></tr>
+			<tr><td>e</td><td>ⲉ</td><td></td><td>Y</td><td>ⲯ</td></tr>
+			<tr><td>Z</td><td>ⲋ</td><td></td><td>w</td><td>ⲱ</td></tr>
+			<tr><td>z</td><td>ⲍ</td><td></td><td>W</td><td>ϣ</td></tr>
+			<tr><td>h</td><td>ⲏ</td><td></td><td>f</td><td>ϥ</td></tr>
+			<tr><td>j</td><td>ⲑ</td><td></td><td>H</td><td>ϩ</td></tr>
+			<tr><td>i</td><td>ⲓ</td><td></td><td>$</td><td>ⳉ</td></tr>
+			<tr><td>k</td><td>ⲕ</td><td></td><td>q</td><td>ϧ</td></tr>
+			<tr><td>l</td><td>ⲗ</td><td></td><td>D</td><td>ϫ</td></tr>
+			<tr><td>m</td><td>ⲙ</td><td></td><td>K</td><td>ϭ</td></tr>
+			<tr><td>n</td><td>ⲛ</td><td></td><td>T</td><td>ϯ</td></tr>
+			<tr><td>X</td><td>ⲝ</td><td></td><td>_</td><td>̅</td></tr>
+			<tr><td>o</td><td>ⲟ</td><td></td><td>=</td><td>⸗</td></tr>
+			<tr><td>p</td><td>ⲡ</td><td></td><td>&amp;</td><td>⸢</td></tr>
+			<tr><td>r</td><td>ⲣ</td><td></td><td>\</td><td>⸣</td></tr>
+			<tr><td>s</td><td>ⲥ</td></tr>
 		</table>
 		
 		<h3>Greek</h3>
 		<table>
-			<tr><td>a</td><td>→</td><td>α</td></tr>
-			<tr><td>b</td><td>→</td><td>β</td></tr>
-			<tr><td>g</td><td>→</td><td>γ</td></tr>
-			<tr><td>d</td><td>→</td><td>δ</td></tr>
-			<tr><td>e</td><td>→</td><td>ε</td></tr>
-			<tr><td>z</td><td>→</td><td>ζ</td></tr>
-			<tr><td>h</td><td>→</td><td>η</td></tr>
-			<tr><td>q</td><td>→</td><td>θ</td></tr>
-			<tr><td>i</td><td>→</td><td>ι</td></tr>
-			<tr><td>I</td><td>→</td><td>Ι</td></tr>
-			<tr><td>k</td><td>→</td><td>κ</td></tr>
-			<tr><td>l</td><td>→</td><td>λ</td></tr>
-			<tr><td>m</td><td>→</td><td>μ</td></tr>
-			<tr><td>n</td><td>→</td><td>ν</td></tr>
-			<tr><td>c</td><td>→</td><td>ξ</td></tr>
-			<tr><td>o</td><td>→</td><td>ο</td></tr>
-			<tr><td>p</td><td>→</td><td>π</td></tr>
-			<tr><td>r</td><td>→</td><td>ρ</td></tr>
-			<tr><td>s</td><td>→</td><td>σ</td></tr>
-			<tr><td>j</td><td>→</td><td>ς</td></tr>
-			<tr><td>c</td><td>→</td><td>ϲ</td></tr>
-			<tr><td>t</td><td>→</td><td>τ</td></tr>
-			<tr><td>u</td><td>→</td><td>υ</td></tr>
-			<tr><td>f</td><td>→</td><td>φ</td></tr>
-			<tr><td>x</td><td>→</td><td>χ</td></tr>
-			<tr><td>y</td><td>→</td><td>ψ</td></tr>
-			<tr><td>w</td><td>→</td><td>ω</td></tr>
-			<tr><td>W*</td><td>→</td><td>Ꞷ</td></tr>
-			<tr><td>:</td><td>→</td><td>·</td></tr>
-			<tr><td>;</td><td>→</td><td>·</td></tr>
-			<tr><td>?</td><td>→</td><td>;</td></tr>
+			<tr><td><b>from</b></td><td><b>to</b></td><td></td><td><b>from</b></td><td><b>to</b></td></tr>
+			<tr><td>a</td><td>α</td><td></td><td>p</td><td>π</td></tr>
+			<tr><td>b</td><td>β</td><td></td><td>r</td><td>ρ</td></tr>
+			<tr><td>g</td><td>γ</td><td></td><td>s</td><td>σ</td></tr>
+			<tr><td>d</td><td>δ</td><td></td><td>j</td><td>ς</td></tr>
+			<tr><td>e</td><td>ε</td><td></td><td>c</td><td>ϲ</td></tr>
+			<tr><td>z</td><td>ζ</td><td></td><td>t</td><td>τ</td></tr>
+			<tr><td>h</td><td>η</td><td></td><td>u</td><td>υ</td></tr>
+			<tr><td>q</td><td>θ</td><td></td><td>f</td><td>φ</td></tr>
+			<tr><td>i</td><td>ι</td><td></td><td>x</td><td>χ</td></tr>
+			<tr><td>I</td><td>Ι</td><td></td><td>y</td><td>ψ</td></tr>
+			<tr><td>k</td><td>κ</td><td></td><td>w</td><td>ω</td></tr>
+			<tr><td>l</td><td>λ</td><td></td><td>W*</td><td>Ꞷ</td></tr>
+			<tr><td>m</td><td>μ</td><td></td><td>:</td><td>·</td></tr>
+			<tr><td>n</td><td>ν</td><td></td><td>;</td><td>·</td></tr>
+			<tr><td>c</td><td>ξ</td><td></td><td>?</td><td>;</td></tr>
+			<tr><td>o</td><td>ο</td></tr>
 		</table>
 
 		<hr></hr>
