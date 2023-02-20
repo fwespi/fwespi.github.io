@@ -31,7 +31,8 @@ button in the ribbon in order to convert the beta code into the proper Unicode c
 \
 For further information choose the \
 <img src="./src/icons/Icon-80.png" height="20"/> **Info** \
-button in the ribbon.\
+button in the ribbon.
+
 --- 
 
 For example, if your input is 
