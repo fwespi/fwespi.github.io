@@ -119,7 +119,9 @@
 				<br><img src="./icons/Hiero-80.png" onclick="convertHieroglyphs()"/> <b>Hieroglyphs</b>, 
 				<br><img src="./icons/Coptic-80.png" onclick="convertCoptic()"/> <b>Coptic</b>, or 
 				<br><img src="./icons/Greek-80.png" onclick="convertGreek()"/> <b>Greek</b> 
+				<br><img src="./icons/IPA-80.png" onclick="convertIPA()"/> <b>IPA</b> 
 				<br>button in the ribbon in order to convert the beta code into the proper Unicode characters.
+				<br><br>The same options are also available in the <b>context menu</b> that opens with a right-click on the text selection.
 				<br><br>Note that a font covering the required Unicode characters must be installed for the characters to be displayed correctly.
 			</li>
 		</ol>
@@ -136,6 +138,7 @@
 
 		<h3>Special rules for Egyptological Transliteration</h3>
 		<ul>
+			<li>The beta code system follows MdC (Manuel de Codage), but includes some special rules.</i>
 			<li>Use an exclamation mark to avoid replacement:
 				<br>e.g. <b>a!</b> → <b>a</b>, while <b>a</b> → <b>ꜥ</b>
 			</li>
@@ -172,6 +175,13 @@
 				• trema: <b>+</b><br>
 				• iota subscriptum: <b>|</b>
 			</li>
+		</ul>
+		
+		<hr></hr>
+		
+		<h3>Special rules for IPA (International Phonetic Alphabet)</h3>
+		<ul>
+			<li>The beta code system follows X-SAMPA (Extended Speech Assessment Methods Phonetic Alphabet).</li>
 		</ul>
 		
 		<hr></hr>
@@ -250,6 +260,22 @@
 			<tr><td>n</td><td>ν</td><td></td><td>;</td><td>·</td></tr>
 			<tr><td>c</td><td>ξ</td><td></td><td>?</td><td>;</td></tr>
 			<tr><td>o</td><td>ο</td></tr>
+		</table>
+		
+		<h3>IPA</h3>
+		<table>
+			<tr><td><b>from</b></td><td><b>to</b></td><td></td><td><b>from</b></td><td><b>to</b></td></tr>
+			<tr><td>B</td><td>β</td><td></td><td>@</td><td>ə</td></tr>
+			<tr><td>v\</td><td>ʋ</td><td></td><td>E</td><td>ɛ</td></tr>
+			<tr><td>T</td><td>θ</td><td></td><td>O</td><td>ɔ</td></tr>
+			<tr><td>S</td><td>ʃ</td><td></td><td>_h</td><td>ʰ</td></tr>
+			<tr><td>J\</td><td>ɟ</td><td></td><td>_j</td><td>ʲ</td></tr>
+			<tr><td>G</td><td>ɣ</td><td></td><td>_w</td><td>ʷ</td></tr>
+			<tr><td>R\</td><td>ʀ</td><td></td><td>_></td><td>ʼ (ejective)</td></tr>
+			<tr><td>R</td><td>ʁ</td><td></td><td>_^</td><td>̯ (syllabic)</td></tr>
+			<tr><td>X\</td><td>ħ</td><td></td><td>_.</td><td>̣ (emphatic)</td></tr>
+			<tr><td>?\</td><td>ʕ</td><td></td><td>"</td><td>ˈ (stress)</td></tr>
+			<tr><td>?</td><td>ʔ</td><td></td><td>0</td><td>∅</td></tr>
 		</table>
 
 		<hr></hr>
