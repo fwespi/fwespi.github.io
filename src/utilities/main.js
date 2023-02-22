@@ -153,15 +153,14 @@ function handleInput (e) {
 function substituteCharacters (event, mapping) {
 	Word.run( async context => {		
 		const selection = context.document.getSelection();
+		context.load(selection, "text");
+		await context.sync();
+			
+		let txt = selection.text;
 		for(let n=0; n<mapping.length; n++){
-			const char = mapping[n][0];
-			const results = selection.search(char, {matchCase: true });
-			context.load(results);
-			await context.sync();
-			for(let i = 0; i < results.items.length; i++) {
-				results.items[i].insertText(mapping[n][1], "replace");
-			};
+			txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
 		};
+		selection.insertText(txt, "replace");
 		await context.sync();
 	});
 	
@@ -187,6 +186,12 @@ async function convertGreek (event) {
 	substituteCharacters(event, data.map);
 };
 
+async function convertIPA (event) {
+	const response = await fetch("./data/IPA.json");
+	const data = await response.json();
+	substituteCharacters(event, data.map);
+};
+
 async function convertHieroglyphs (event) {
 	Word.run( async context => {		
 		const selection = context.document.getSelection();
@@ -195,6 +200,7 @@ async function convertHieroglyphs (event) {
 		
 		let txt = selection.text;
 		if(wasm){
+			//insert HTML: <span style='display:none;mso-hide:all'>abc</span>
 			txt = wasm.convert_to_hieroglyphs(txt);
 			selection.insertText(txt, "replace");
 			selection.select("End");
