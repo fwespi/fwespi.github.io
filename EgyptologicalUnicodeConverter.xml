@@ -104,6 +104,23 @@
 									</Action>
 								</Control>
 								
+								<Control xsi:type="Button" id="IPAButton">
+									<Label resid="IPAButton.Label" />
+									<Supertip>
+										<Title resid="IPAButton.Label" />
+										<Description resid="IPAButton.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="IPAButton.Icon.16" />
+										<bt:Image size="32" resid="IPAButton.Icon.32" />
+										<bt:Image size="80" resid="IPAButton.Icon.80" />
+										<bt:Image size="96" resid="IPAButton.Icon.96" />
+									</Icon>
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>convertIPA</FunctionName>
+									</Action>
+								</Control>
+								
 								<Control xsi:type="Button" id="TaskpaneButton">
 									<Label resid="TaskpaneButton.Label" />
 									<Supertip>
@@ -211,6 +228,23 @@
 										</Action>
 									</Item>
 									
+									<Item id="IPA">
+										<Label resid="IPAButton.Label"/>
+										<Supertip>
+											<Title resid="IPAButton.Label"/>
+											<Description resid="IPAButton.Tooltip"/>
+										</Supertip>
+										<Icon>
+											<bt:Image size="16" resid="IPAButton.Icon.16"/>
+											<bt:Image size="32" resid="IPAButton.Icon.32"/>
+											<bt:Image size="80" resid="IPAButton.Icon.80"/>
+											<bt:Image size="96" resid="IPAButton.Icon.96"/>
+										</Icon>
+										<Action xsi:type="ExecuteFunction">
+											<FunctionName>convertIPA</FunctionName>
+										</Action>
+									</Item>
+									
 									<Item id="Taskpane">
 										<Label resid="TaskpaneButton.Label"/>
 										<Supertip>
@@ -267,24 +301,31 @@
 				<bt:Image id="GreekButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Greek-32.png" />
 				<bt:Image id="GreekButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Greek-80.png" />
 				<bt:Image id="GreekButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Greek-96.png" />
+				
+				<bt:Image id="IPAButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/IPA-16.png" />
+				<bt:Image id="IPAButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/IPA-32.png" />
+				<bt:Image id="IPAButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/IPA-80.png" />
+				<bt:Image id="IPAButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/IPA-96.png" />
 			</bt:Images>
 			
 			<bt:ShortStrings>
 				<bt:String id="GroupLabel" DefaultValue="Egyptological Unicode Converter" />
+				<bt:String id="TaskpaneButton.Label" DefaultValue="Info" />
 				<bt:String id="TransliterationButton.Label" DefaultValue="Transliteration" />
 				<bt:String id="HieroButton.Label" DefaultValue="Hieroglyphs" />
 				<bt:String id="CopticButton.Label" DefaultValue="Coptic" />
 				<bt:String id="GreekButton.Label" DefaultValue="Greek" />
-				<bt:String id="TaskpaneButton.Label" DefaultValue="Info" />
+				<bt:String id="IPAButton.Label" DefaultValue="IPA" />
 			</bt:ShortStrings>
 			
 			<bt:LongStrings>
 				<bt:String id="GroupLabel.Descr" DefaultValue="Convert selected text to Egyptological Unicode characters." />
+				<bt:String id="TaskpaneButton.Tooltip" DefaultValue="How to use the converter." />
 				<bt:String id="TransliterationButton.Tooltip" DefaultValue="Convert selected text to Egyptological Unicode characters." />
 				<bt:String id="HieroButton.Tooltip" DefaultValue="Convert selected text to Hieroglyphic Unicode characters." />
 				<bt:String id="CopticButton.Tooltip" DefaultValue="Convert selected text to Coptic Unicode characters." />
 				<bt:String id="GreekButton.Tooltip" DefaultValue="Convert selected text to Greek Unicode characters." />
-				<bt:String id="TaskpaneButton.Tooltip" DefaultValue="How to use the converter." />
+				<bt:String id="IPAButton.Tooltip" DefaultValue="Convert selected text to IPA symbols." />
 			</bt:LongStrings>
 			
 		</Resources>
