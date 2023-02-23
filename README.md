@@ -39,7 +39,7 @@ For example, if your input is
 **sXA** 
 and you choose the 
 <img src="./src/icons/Transcription-80.png" height="20"/> button, 
-**sXA** will be replaced by **sẖꜣ**.\
+**sXA** will be replaced by **sẖꜣ**.
 
 ---
 
