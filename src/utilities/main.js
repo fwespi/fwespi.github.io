@@ -168,8 +168,8 @@ function substituteCharacters (event, mapping) {
 		event.completed();
 };
 
-async function convertTransliteration (event) {
-	const response = await fetch("./data/Transliteration.json");
+async function convertTranscription (event) {
+	const response = await fetch("./data/Transcription.json");
 	const data = await response.json();
 	substituteCharacters(event, data.map);
 };
