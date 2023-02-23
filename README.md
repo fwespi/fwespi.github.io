@@ -23,7 +23,7 @@ The Egyptological Unicode Converter is a Microsoft Word add-in that converts tex
 ## How to use
 1) In Word, select some text written in Egyptological, Coptic, or Greek beta code.
 2) Choose either the \
-<img src="./src/icons/Transliteration-80.png" height="20"/> **Transliteration**, \
+<img src="./src/icons/Transcription-80.png" height="20"/> **Transcription**, \
 <img src="./src/icons/Hiero-80.png" height="20"/> **Hieroglyphs**, \
 <img src="./src/icons/Coptic-80.png" height="20"/> **Coptic**, or \
 <img src="./src/icons/Greek-80.png" height="20"/> **Greek** \
@@ -38,7 +38,7 @@ button in the ribbon.
 For example, if your input is 
 **sXA** 
 and you choose the 
-<img src="./src/icons/Transliteration-80.png" height="20"/> button, 
+<img src="./src/icons/Transcription-80.png" height="20"/> button, 
 **sXA** will be replaced by **sẖꜣ**.\
 
 ---

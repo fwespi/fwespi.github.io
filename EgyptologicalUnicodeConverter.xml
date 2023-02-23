@@ -36,20 +36,20 @@
 									<bt:Image size="96" resid="Group.Icon.96" />
 								</Icon>
 								
-								<Control xsi:type="Button" id="TransliterationButton">
-									<Label resid="TransliterationButton.Label" />
+								<Control xsi:type="Button" id="TranscriptionButton">
+									<Label resid="TranscriptionButton.Label" />
 									<Supertip>
-										<Title resid="TransliterationButton.Label" />
-										<Description resid="TransliterationButton.Tooltip" />
+										<Title resid="TranscriptionButton.Label" />
+										<Description resid="TranscriptionButton.Tooltip" />
 									</Supertip>
 									<Icon>
-										<bt:Image size="16" resid="TransliterationButton.Icon.16" />
-										<bt:Image size="32" resid="TransliterationButton.Icon.32" />
-										<bt:Image size="80" resid="TransliterationButton.Icon.80" />
-										<bt:Image size="96" resid="TransliterationButton.Icon.96" />
+										<bt:Image size="16" resid="TranscriptionButton.Icon.16" />
+										<bt:Image size="32" resid="TranscriptionButton.Icon.32" />
+										<bt:Image size="80" resid="TranscriptionButton.Icon.80" />
+										<bt:Image size="96" resid="TranscriptionButton.Icon.96" />
 									</Icon>
 									<Action xsi:type="ExecuteFunction">
-										<FunctionName>convertTransliteration</FunctionName>
+										<FunctionName>convertTranscription</FunctionName>
 									</Action>
 								</Control>
 								
@@ -160,20 +160,20 @@
 								 
 								  <Items>
 								  
-									 <Item id="Transliteration">
-										<Label resid="TransliterationButton.Label"/>
+									 <Item id="Transcription">
+										<Label resid="TranscriptionButton.Label"/>
 										<Supertip>
-											<Title resid="TransliterationButton.Label"/>
+											<Title resid="TranscriptionButton.Label"/>
 											<Description resid="TaskpaneButton.Tooltip"/>
 										</Supertip>
 										<Icon>
-											<bt:Image size="16" resid="TransliterationButton.Icon.16"/>
-											<bt:Image size="32" resid="TransliterationButton.Icon.32"/>
-											<bt:Image size="80" resid="TransliterationButton.Icon.80"/>
-											<bt:Image size="96" resid="TransliterationButton.Icon.96"/>
+											<bt:Image size="16" resid="TranscriptionButton.Icon.16"/>
+											<bt:Image size="32" resid="TranscriptionButton.Icon.32"/>
+											<bt:Image size="80" resid="TranscriptionButton.Icon.80"/>
+											<bt:Image size="96" resid="TranscriptionButton.Icon.96"/>
 										</Icon>
 										<Action xsi:type="ExecuteFunction">
-											<FunctionName>convertTransliteration</FunctionName>
+											<FunctionName>convertTranscription</FunctionName>
 										</Action>
 									</Item>
 									
@@ -282,10 +282,10 @@
 				<bt:Image id="Group.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Icon-80.png" />
 				<bt:Image id="Group.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Icon-96.png" />
 				
-				<bt:Image id="TransliterationButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-16.png" />
-				<bt:Image id="TransliterationButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-32.png" />
-				<bt:Image id="TransliterationButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-80.png" />
-				<bt:Image id="TransliterationButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Transliteration-96.png" />
+				<bt:Image id="TranscriptionButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Transcription-16.png" />
+				<bt:Image id="TranscriptionButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Transcription-32.png" />
+				<bt:Image id="TranscriptionButton.Icon.80" DefaultValue="https://fwespi.github.io/src/icons/Transcription-80.png" />
+				<bt:Image id="TranscriptionButton.Icon.96" DefaultValue="https://fwespi.github.io/src/icons/Transcription-96.png" />
 				
 				<bt:Image id="HieroButton.Icon.16" DefaultValue="https://fwespi.github.io/src/icons/Hiero-16.png" />
 				<bt:Image id="HieroButton.Icon.32" DefaultValue="https://fwespi.github.io/src/icons/Hiero-32.png" />
@@ -311,7 +311,7 @@
 			<bt:ShortStrings>
 				<bt:String id="GroupLabel" DefaultValue="Egyptological Unicode Converter" />
 				<bt:String id="TaskpaneButton.Label" DefaultValue="Info" />
-				<bt:String id="TransliterationButton.Label" DefaultValue="Transliteration" />
+				<bt:String id="TranscriptionButton.Label" DefaultValue="Transcription" />
 				<bt:String id="HieroButton.Label" DefaultValue="Hieroglyphs" />
 				<bt:String id="CopticButton.Label" DefaultValue="Coptic" />
 				<bt:String id="GreekButton.Label" DefaultValue="Greek" />
@@ -321,7 +321,7 @@
 			<bt:LongStrings>
 				<bt:String id="GroupLabel.Descr" DefaultValue="Convert selected text to Egyptological Unicode characters." />
 				<bt:String id="TaskpaneButton.Tooltip" DefaultValue="How to use the converter." />
-				<bt:String id="TransliterationButton.Tooltip" DefaultValue="Convert selected text to Egyptological Unicode characters." />
+				<bt:String id="TranscriptionButton.Tooltip" DefaultValue="Convert selected text to Egyptological Unicode characters." />
 				<bt:String id="HieroButton.Tooltip" DefaultValue="Convert selected text to Hieroglyphic Unicode characters." />
 				<bt:String id="CopticButton.Tooltip" DefaultValue="Convert selected text to Coptic Unicode characters." />
 				<bt:String id="GreekButton.Tooltip" DefaultValue="Convert selected text to Greek Unicode characters." />
