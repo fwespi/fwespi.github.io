@@ -79,7 +79,6 @@ window.addEventListener("load", () => {
 		if(e.key == "ArrowDown"){
 			e.preventDefault();
 			const selection = document.querySelector(".selected");
-			console.log(selection);
 			if(selection && selection.nextSibling){
 				selection.classList.remove('selected');
 				selection.nextSibling.classList.add('selected');
@@ -192,7 +191,15 @@ async function convertIPA (event) {
 	substituteCharacters(event, data.map);
 };
 
-async function convertHieroglyphs (event) {
+async function convertHieroglyphsLTR (event) {
+	convertHieroglyphs(event, false);
+}
+
+async function convertHieroglyphsRTL (event) {
+	convertHieroglyphs(event, true);
+}
+
+async function convertHieroglyphs (event, rtl) {
 	Word.run( async context => {		
 		const selection = context.document.getSelection();
 		context.load(selection, "text");
@@ -200,9 +207,18 @@ async function convertHieroglyphs (event) {
 		
 		let txt = selection.text;
 		if(wasm){
-			//insert HTML: <span style='display:none;mso-hide:all'>abc</span>
 			txt = wasm.convert_to_hieroglyphs(txt);
 			selection.insertText(txt, "replace");
+			await context.sync();
+			
+			const start = selection.getRange("start");
+			start.load("font");
+			await context.sync();
+			const fontSize = start.font.size;
+			const font = start.font.name;
+			txt = applyHieroglyphicFormatControls(txt, font, fontSize, rtl);
+			
+			selection.insertHtml(txt, "replace");
 			selection.select("End");
 		}
 		await context.sync();
@@ -211,3 +227,399 @@ async function convertHieroglyphs (event) {
 	if(event)
 		event.completed();
 };
+
+
+function applyHieroglyphicFormatControls (txt, font, fontSize, rtl=false) {
+		
+	/* font size & family */
+	const gap = 2;
+	const canvas = document.createElement("canvas");
+	const ctx = canvas.getContext("2d");
+	ctx.font = `${fontSize}pt ${font}` ;
+	
+	/* text measurements */
+	const getDimensions = (char) => {
+		let dim = [-1, -1];
+		
+		if(char.indexOf(group_start) == -1){
+			const m = ctx.measureText(char);
+			dim[0] = (m.actualBoundingBoxRight + m.actualBoundingBoxLeft) * 0.75;	//px to pt
+			dim[1] = (m.actualBoundingBoxAscent + m.actualBoundingBoxDescent) * 0.75; //px to pt
+		} else {
+			char.replace(
+				new RegExp(`${group_start}\{(.+?) (.+?)\}`), (m, a, b) => {
+					dim[0] = parseFloat(a);
+					dim[1] = parseFloat(b);
+			});
+		}
+		
+		return dim;
+	};
+	
+	/*delimiters*/
+	const group_start = "";
+	const group_end = "";
+	
+	/*modifiers*/
+	const verticalJoiner = ":";
+	const horizontalJoiner = "*";
+	const insertTopStart = "°\\|";
+	const insertBottomStart = "\\.\\|";
+	const insertTopEnd = "\\|°";	
+	const insertBottomEnd = "\\|\\.";
+	const overlayMiddle = "\\+";
+	const segmentStart = "\\(";
+	const segmentEnd = "\\)";
+	
+	console.log(txt);
+	console.log(txt.length);
+	console.log(/\uD80D\uDC30/g.test(txt));
+
+	txt = txt
+		.replace(/\uD80D\uDC30/g, verticalJoiner)				//U+13430
+		.replace(/\uD80D\uDC31/g, horizontalJoiner)		//U+13431
+		.replace(/\uD80D\uDC32/g, insertTopStart)			//U+13432
+		.replace(/\uD80D\uDC33/g, insertBottomStart)		//U+13433
+		.replace(/\uD80D\uDC34/g, insertTopEnd)				//U+13434
+		.replace(/\uD80D\uDC35/g, insertBottomEnd)		//U+13435
+		.replace(/\+/g, overlayMiddle).replace(/\uD80D\uDC36/g, overlayMiddle)	//U+13436
+		.replace(/\(/g, segmentStart).replace(/\uD80D\uDC37/g, segmentStart)		//U+13437
+		.replace(/\)/g, segmentEnd).replace(/\uD80D\uDC38/g, segmentEnd)		//U+13438
+		.replace(/◰/g, insertTopStart.substr(1))
+		.replace(/◱/g, insertBottomStart.substr(1))
+		.replace(/◳/g, insertTopEnd.substr(1))
+		.replace(/◲/g, insertBottomEnd.substr(1));
+
+	/*units*/
+	const character = "(?:[\uD800-\uDBFF][\uDC00-\uDFFF])";
+	const characterLikeUnit = "(?:" + group_start + "[^" + group_end + "]*" + group_end + ")";
+	
+	/*groups*/
+	const groups = [
+		"\\\\"+segmentStart + "(.*?)\\\\"  + segmentEnd,
+		"(" + character + "|" + characterLikeUnit + ")\\\\" +	overlayMiddle 	+ "(" + character + "|" + characterLikeUnit + ")",
+		"(" + character + "|" + characterLikeUnit + ")" +	insertBottomEnd 	+ "(" + character + "|" + characterLikeUnit + ")",
+		"(" + character + "|" + characterLikeUnit + ")" +	insertTopEnd 		+ "(" + character + "|" + characterLikeUnit + ")",
+		"(" + character + "|" + characterLikeUnit + ")" +	insertBottomStart + "(" + character + "|" + characterLikeUnit + ")",
+		"(" + character + "|" + characterLikeUnit + ")" +	insertTopStart 	+ "(" + character + "|" + characterLikeUnit + ")",
+		"(" + character + "|" + characterLikeUnit + ")\\" +	horizontalJoiner 	+ "(" + character + "|" + characterLikeUnit + ")",
+		"(" + character + "|" + characterLikeUnit + ")" +	verticalJoiner 	+ "(" + character + "|" + characterLikeUnit + ")"
+	]
+	
+	/*rgx*/
+	const rgxCharacters= new RegExp(character, "g");
+
+	const rgx = [];
+	groups.forEach(g => rgx.push(new RegExp(g, "g")));
+		
+	/*handler*/
+	const handler = [
+	
+		/*segment*/
+		function(){
+			const a = arguments[1];
+			
+			let w=0, h=0;
+			a.replace(new RegExp("(?:" + character + "|" + characterLikeUnit + ")", "g"), m => {
+				const dim = getDimensions(m);
+				w += dim[0];
+				h = Math.max(h, dim[1]);
+			});
+			
+			let c = `{${w} ${h}}<span style='display:none;mso-hide:all'>\u{13437}</span>${a}<span style='display:none;mso-hide:all'>\u{13438}</span>`;
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+
+			return group_start + c + group_end;
+		},
+		
+		/*overlay middle*/
+		function(){
+			const a = arguments[1];
+			const b = arguments[2];
+			
+			const dim = [
+				...getDimensions(a),
+				...getDimensions(b)
+			];
+			
+			const w = Math.max(dim[0], dim[2]);
+			const h = Math.max(dim[1], dim[3]);
+			
+			let c = `{${w} ${h}}`;
+			if(dim[0] > dim[2]){ 
+				//a wider than b
+					
+					if(dim[1] > dim[3]){
+						//a taller than b
+						const u = (dim[1] - dim[3]) / 2;
+						const l = (dim[0] + dim[2]) / 2;
+						const r = (dim[0] - dim[2]) / 2;
+						c += `${a}`;
+						c += `<span style='display:none;mso-hide:all'>\u{13436}</span>`;
+						if(rtl){
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\r ${r}<span style='mso-element:field-end'></span>`;
+						} else {
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\r ${r}<span style='mso-element:field-end'></span>`;
+						}
+						
+					} else {
+						//b taller than a
+						const u = (dim[3] - dim[1]) / 2;
+						const l = (dim[0] + dim[2]) / 2;
+						const r = (dim[0] - dim[2]) / 2;
+						if(rtl){
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} <span style='mso-element:field-end'></span>${a}`;
+							c += `<span style='display:none;mso-hide:all'>\u{13436}</span>`;
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+						} else {
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} <span style='mso-element:field-end'></span>${a}`;
+							c += `<span style='display:none;mso-hide:all'>\u{13436}</span>`;
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+						}
+						c += `<span style='mso-element:field-begin'></span> ADVANCE \\r ${r} <span style='mso-element:field-end'></span>`;
+					}
+			} else {
+				//b wider than a
+					if(dim[1] > dim[3]){
+						//a taller than b
+						const u = (dim[1] - dim[3]) / 2;
+						const r = (dim[2] - dim[0]) / 2;
+						const l = (dim[2] + dim[0]) / 2;
+						c += `<span style='mso-element:field-begin'></span> ADVANCE \\r ${r} <span style='mso-element:field-end'></span>${a}`;
+						c += `<span style='display:none;mso-hide:all'>\u{13436}</span>`;
+						if(rtl){
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} <span style='mso-element:field-end'></span>`;
+						} else {
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} <span style='mso-element:field-end'></span>`;
+						}
+					
+					} else {
+						//b taller than a
+						const u = (dim[3] - dim[1]) / 2;
+						const r = (dim[2] - dim[0]) / 2;
+						const l = (dim[2] + dim[0]) / 2;
+						if(rtl){
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\r ${r} <span style='mso-element:field-end'></span>${a}`;
+							c += `<span style='display:none;mso-hide:all'>\u{13436}</span>`;
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+						} else {
+							c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\r ${r} <span style='mso-element:field-end'></span>${a}`;
+							c += `<span style='display:none;mso-hide:all'>\u{13436}</span>`;
+							c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+						}
+					}
+			}
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+
+			return group_start + c + group_end;
+		},
+	
+		/*insertBottomEnd*/
+		function(){
+			const a = arguments[1];
+			const b = arguments[2];
+			
+			const dim = [
+				...getDimensions(a),
+				...getDimensions(b)
+			];
+			
+			const w = dim[0];
+			const h = dim[1];
+			const l = dim[2];
+			let c = `{${w} ${h}}`
+			c += `${a}<span style='display:none;mso-hide:all'>\u{13435}</span>`;
+			c += `<span style='mso-element:field-begin'></span> ADVANCE \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+
+			return group_start + c + group_end;
+		},
+	
+		/*insertTopEnd*/
+		function(){
+			const a = arguments[1];
+			const b = arguments[2];
+			
+			const dim = [
+				...getDimensions(a),
+				...getDimensions(b)
+			];
+			
+			const w = dim[0];
+			const h = dim[1];
+			const u = dim[1] - dim[3];
+			const l = dim[2];
+			
+			let c = `{${w} ${h}}`;
+			c += `${a}<span style='display:none;mso-hide:all'>\u{13434}</span>`;
+			if(rtl){
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l}<span style='mso-element:field-end'></span>${b}`;
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} <span style='mso-element:field-end'></span>`;
+			} else {
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l}<span style='mso-element:field-end'></span>${b}`;
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} <span style='mso-element:field-end'></span>`;
+			}
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+
+			return group_start + c + group_end;
+		},
+	
+		/*insertBottomStart*/
+		function(){
+			const a = arguments[1];
+			const b = arguments[2];
+			
+			const dim = [
+				...getDimensions(a),
+				...getDimensions(b)
+			];
+			
+			const w = dim[0];
+			const h = dim[1];
+			const l = dim[0];
+			const r = dim[0] - dim[2];
+			let c = `{${w} ${h}}${a}<span style='display:none;mso-hide:all'>\u{13433}</span>`;
+			c += `<span style='mso-element:field-begin'></span> ADVANCE \\l ${l}<span style='mso-element:field-end'></span>${b}`;
+			c += `<span style='mso-element:field-begin'></span> ADVANCE \\r ${r}<span style='mso-element:field-end'></span>`;
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+			return group_start + c + group_end;
+		},
+		
+		/*insertTopStart*/
+		function(){
+			const a = arguments[1];
+			const b = arguments[2];
+			
+			const dim = [
+				...getDimensions(a),
+				...getDimensions(b)
+			];
+			
+			const w = dim[0];
+			const h = dim[1];
+			const u = dim[1] - dim[3];
+			const l = dim[0];
+			const r = dim[0] - dim[2];
+			let c = `{${w} ${h}}`;
+			c += `${a}`;
+			c += `<span style='display:none;mso-hide:all'>\u{13432}</span>`;
+			if(rtl){
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l}<span style='mso-element:field-end'></span>${b}`;
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\r ${r}<span style='mso-element:field-end'></span>`;
+			} else {
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l}<span style='mso-element:field-end'></span>${b}`;
+				c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\r ${r}<span style='mso-element:field-end'></span>`;
+			}
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+
+			return group_start + c + group_end;
+		},
+		
+		/*horizontalJoiner*/
+		function(){
+			const a = arguments[1];
+			const b = arguments[2];
+			
+			const dim = [
+				...getDimensions(a),
+				...getDimensions(b)
+			];
+			
+			const w = dim[0] + dim[2] + gap;
+			const h = Math.max(dim[1], dim[3]);
+			
+			let c = `{${w} ${h}}${a}<span style='display:none;mso-hide:all'>\u{13431}</span>`;
+			c += `<span style='mso-element:field-begin'></span> ADVANCE \\r ${gap} <span style='mso-element:field-end'></span>${b}`;
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+
+			return group_start + c + group_end;
+		},
+		
+		/*verticalJoiner*/
+		function(){
+			const a = arguments[1];
+			const b = arguments[2];
+			let c = '';
+			
+			const dim = [
+				...getDimensions(a),
+				...getDimensions(b)
+			];
+			
+			if(dim[0] > dim[2]){ 
+				//top wider than bottom
+				
+				const u = dim[3] + gap;
+				if(rtl){
+					const l = (dim[0] + dim[2]) / 2;
+					const r = (dim[0] - dim[2]) / 2;
+					c = `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} <span style='mso-element:field-end'></span>${a}`;
+					c += `<span style='display:none;mso-hide:all'>\u{13430}</span>`;
+					c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+					c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\r ${r} <span style='mso-element:field-end'></span>`;
+				}	else {
+					const l = (dim[0] + dim[2]) / 2;
+					const r = (dim[0] - dim[2]) / 2;
+					c = `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} <span style='mso-element:field-end'></span>${a}`;
+					c += `<span style='display:none;mso-hide:all'>\u{13430}</span>`;
+					c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+					c +=  `<span style='mso-element:field-begin'></span> ADVANCE \\r ${r} <span style='mso-element:field-end'></span>`;
+				}
+			} else {
+				//bottom wider than top
+				const u = dim[3] + gap;
+				const r = (dim[2] - dim[0]) / 2 ;
+				const l = (dim[2] + dim[0]) / 2;
+				if(rtl){
+					c = `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\r ${r} <span style='mso-element:field-end'></span>${a}`;
+					c += `<span style='display:none;mso-hide:all'>\u{13430}</span>`;
+					c += `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+				} else {
+					c = `<span style='mso-element:field-begin'></span> ADVANCE \\u ${u} \\r ${r} <span style='mso-element:field-end'></span>${a}`;
+					c += `<span style='display:none;mso-hide:all'>\u{13430}</span>`;
+					c += `<span style='mso-element:field-begin'></span> ADVANCE \\d ${u} \\l ${l} <span style='mso-element:field-end'></span>${b}`;
+				}
+			}
+			
+			c = `{${Math.max(dim[0], dim[2])} ${dim[1]+dim[3] + gap}}${c}`;
+			c = c.replace(new RegExp(`${group_start}\{.+?\}`, "g"), '');
+			c = c.replace(new RegExp(`${group_end}`, "g"), '');
+
+			return group_start + c + group_end;
+		}
+	]
+	
+	const applyHandlers = (txt) => {
+		for(let n=0; n<groups.length; n++){
+			while(rgx[n].test(txt))
+				txt = txt.replace(rgx[n], handler[n]);
+		}
+		
+		txt = txt.replace(new RegExp(group_start+"\{.*?\}", "g"), "");
+		txt = txt.replace(new RegExp(group_end, "g"), "");
+
+		return txt;
+	};
+	
+	txt = txt.replace(/[\u{202A}\u{202B}\u{202C}\u{202D}\u{202E}]/g, '');
+	txt = applyHandlers(txt);
+	if(rtl){
+		txt = `\u{202E}${txt}\u{202C}`;
+		txt = `<span style='font-size:${fontSize}pt; font-family:${font};mso-stylistic-set:1'>${txt}</span>`;
+	} else {
+		txt = `<span style='font-size:${fontSize}pt; font-family:${font}'>${txt}</span>`;
+	}
+	
+	return txt;
+}
