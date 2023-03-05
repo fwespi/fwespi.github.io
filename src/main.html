@@ -116,7 +116,8 @@
 			<li>In Word, select some text written in Egyptological, Hieroglyphic, Coptic, or Greek beta code.</li>
 			<li>Choose either the 
 				<br><img src="./icons/Transcription-80.png" onclick="convertTranscription()"/> <b>Transcription</b>, 
-				<br><img src="./icons/Hiero-80.png" onclick="convertHieroglyphs()"/> <b>Hieroglyphs</b>, 
+				<br><img src="./icons/HieroLTR-80.png" onclick="convertHieroglyphsLTR()"/> <b>Hieroglyphs (ltr)</b>, 
+				<br><img src="./icons/HieroRTL-80.png" onclick="convertHieroglyphsRTL()"/> <b>Hieroglyphs (rtl)</b>, 
 				<br><img src="./icons/Coptic-80.png" onclick="convertCoptic()"/> <b>Coptic</b>, or 
 				<br><img src="./icons/Greek-80.png" onclick="convertGreek()"/> <b>Greek</b> 
 				<br><img src="./icons/IPA-80.png" onclick="convertIPA()"/> <b>IPA</b> 
@@ -138,7 +139,7 @@
 
 		<h3>Special rules for Egyptological Transcription</h3>
 		<ul>
-			<li>The beta code system follows MdC (Manuel de Codage), but includes some special rules.</i>
+			<li>The beta code system follows MdC (Manuel de Codage), but includes some special rules.</li>
 			<li>Use an exclamation mark to avoid replacement:
 				<br>e.g. <b>a!</b> → <b>a</b>, while <b>a</b> → <b>ꜥ</b>
 			</li>
@@ -150,6 +151,31 @@
 			</li>
 			<li>Use the plus sign to make a character uppercase: 
 				<br>e.g. <b>X+</b> → <b>H̱</b>, while <b>X</b> → <b>ẖ</b>
+			</li>
+		</ul>
+		
+		<hr></hr>
+		
+		<h3>Special rules for Hieroglyphs</h3>
+		<ul>
+			<li>The beta code system works by the Gardiner numbers, the Egyptian Hieroglyphs Unicode characters, and 
+			the Egyptian Hieroglyph Format Controls Unicode characters (only the first 9).</li>
+			<li>For the latter, the following substitutes may be used:
+				<br><b>:</b> → vertical joiner
+				<br><b>*</b> → horizontal joiner
+				<br><b>◰</b>, <b>°|</b> → insert at top start
+				<br><b>◱</b>, <b>.|</b> → insert at bottom start
+				<br><b>◳</b>, <b>|°</b> → insert at top end
+				<br><b>◲</b>, <b>|.</b> → insert at bottom end
+				<br><b>+</b> → overlay middle
+				<br><b>(</b> → begin segment
+				<br><b>)</b> → end segment
+			</li>
+			<li>Character positioning is achieved by the use of ADVANCE fields. They can be adjusted 
+			manually by pressing ALT+F9, changing the numbers (\u: up, \d: down, \l: left, \r: right) and pressing ALT+F9 again.
+			<br>If the display is incorrect, it may be necessary to reset the font and font size for the hieroglyphic text before applying the format controls.
+			</li>
+			<li>The format controls are retained as <i>hidden</i> text.
 			</li>
 		</ul>
 		
@@ -273,6 +299,7 @@
 			<tr><td>G</td><td>ɣ</td><td></td><td>_w</td><td>ʷ</td></tr>
 			<tr><td>R\</td><td>ʀ</td><td></td><td>_></td><td>ʼ (ejective)</td></tr>
 			<tr><td>R</td><td>ʁ</td><td></td><td>_^</td><td>̯ (syllabic)</td></tr>
+			<tr><td>R</td><td>ʁ</td><td></td><td>_=</td><td>̩ (syllabic)</td></tr>
 			<tr><td>X\</td><td>ħ</td><td></td><td>_.</td><td>̣ (emphatic)</td></tr>
 			<tr><td>?\</td><td>ʕ</td><td></td><td>"</td><td>ˈ (stress)</td></tr>
 			<tr><td>?</td><td>ʔ</td><td></td><td>0</td><td>∅</td></tr>
