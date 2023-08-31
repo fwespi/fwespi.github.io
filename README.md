@@ -13,7 +13,7 @@ The Egyptological Unicode Converter is a Microsoft Word add-in that converts tex
 2) In Word, navigate to **File** > **Options**.
 3) Choose **Trust Center**, and then **Trust Center Settings**.
 4) Choose **Trusted Add-in Catalogs**.
-5) In the **Catalog Url** box, enter the path (starting with "*\\localhost\C$\\*") to the folder that contains the xml-file and click the **Add catalog** button.
+5) In the **Catalog Url** box, enter the path (starting with "*\\\\localhost\C$\\*") to the folder that contains the xml-file and click the **Add catalog** button.
 6) Select the **Show in Menu** check box and the choose **OK** and close the **Options** dialog window.
 
 7) Navigate to the **Insert** tab of the ribbon and choose select **My Add-ins**.
