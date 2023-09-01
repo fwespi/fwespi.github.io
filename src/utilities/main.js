@@ -113,6 +113,17 @@ function handleBeforeInput (e) {
 	const after = e.target.value.slice(e.target.selectionEnd);
 	
 	e.target.value = before + data + after;
+	e.target.value = e.target.value
+		.replace(/ꜣꜣ([0-9])/g, "AA$1") 
+		.replace(/ꜣ([0-9])/g, "A$1") 
+		.replace(/ḏ([0-9])/g, "D$1") 
+		.replace(/ḥ([0-9])/g, "H$1") 
+		.replace(/Ỉ([0-9])/g, "I$1") 
+		.replace(/Ḳ([0-9])/g, "K$1") 
+		.replace(/š([0-9])/g, "S$1") 
+		.replace(/ṯ([0-9])/g, "T$1") 
+		.replace(/h̭([0-9])/g, "V$1") 
+		.replace(/ẖ([0-9])/g, "X$1");
 	
 	e.target.selectionStart = before.length + data.length;
 	e.target.selectionEnd = before.length + data.length;
