@@ -1,13 +1,6 @@
 const addResourcesToCache = async (resources) => {
 	const cache = await caches.open("v1");
-	//await cache.addAll(resources);
-	for(let r of resources){
-		try {
-			await cache.add(r);
-		} catch (err) {
-			console.warn(`Couldn't add ${r} to cache.`);
-		}
-	}
+	await cache.addAll(resources);
 }
 
 const putInCache = async (request, response) => {
@@ -29,7 +22,7 @@ const cacheFirst = async (request) => {
 self.addEventListener("install", e => {
 	e.waitUntil(
 		addResourcesToCache([
-			"./",
+			"/",
 			"./main.html",
 			"./utilities/main.js",
 			"./utilities/main.wasm",
@@ -41,7 +34,7 @@ self.addEventListener("install", e => {
 			"./icons/Icon-32.png",
 			"./icons/Icon-80.png",
 			"./icons/Icon-96.png",
-			"./icons/Transcription.png",
+			"./icons/Transcription-16.png",
 			"./icons/Transcription-32.png",
 			"./icons/Transcription-80.png",
 			"./icons/Transcription-96.png",
@@ -70,5 +63,5 @@ self.addEventListener("install", e => {
 })
 
 self.addEventListener("fetch", e => {
-	event.respondWidth(cachesFirst(event.request))
+	e.respondWidth(cachesFirst(e.request))
 })
