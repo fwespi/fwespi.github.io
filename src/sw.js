@@ -63,5 +63,5 @@ self.addEventListener("install", e => {
 })
 
 self.addEventListener("fetch", e => {
-	e.respondWidth(cachesFirst(e.request))
+	e.respondWidth(cacheFirst(e.request))
 })
