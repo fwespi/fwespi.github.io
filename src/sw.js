@@ -1,6 +1,13 @@
 const addResourcesToCache = async (resources) => {
 	const cache = await caches.open("v1");
-	await cache.addAll(resources);
+	//await cache.addAll(resources);
+	for(let r of resources){
+		try {
+			await cache.add(r);
+		} catch (err) {
+			console.warn(`Couldn't add ${r} to cache.`);
+		}
+	}
 }
 
 const putInCache = async (request, response) => {
