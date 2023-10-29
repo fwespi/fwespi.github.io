@@ -10,11 +10,12 @@ const putInCache = async (request, response) => {
 
 const cacheFirst = async (request) => {
 	const responseFromCache = await caches.match(request);
-	if(responseFromCache) 
-		return responseFromCache
 	
 	const responseFromNetwork = await fetch(request);
 	putInCache(request, responseFromNetwork.clone());
+	
+	if(responseFromCache) 
+		return responseFromCache
 	
 	return responseFromNetwork;
 }
