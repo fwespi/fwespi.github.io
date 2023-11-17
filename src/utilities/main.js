@@ -302,10 +302,6 @@ function applyHieroglyphicFormatControls (txt, font, fontSize, rtl=false) {
 	const segmentStart = "\\(";
 	const segmentEnd = "\\)";
 	
-	console.log(txt);
-	console.log(txt.length);
-	console.log(/\uD80D\uDC30/g.test(txt));
-
 	txt = txt
 		.replace(/\uD80D\uDC30/g, verticalJoiner)				//U+13430
 		.replace(/\uD80D\uDC31/g, horizontalJoiner)		//U+13431
