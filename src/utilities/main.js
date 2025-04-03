@@ -197,8 +197,6 @@ function substituteCharacters (event, mapping) {
 	
 	Excel.run( async context => {		
 		const activeCell = context.workbook.getActiveCell();
-		//const selectedRange = context.workbook.getSelectedRange();
-		
 		activeCell.load("text");
 	
 		await context.sync();
@@ -207,7 +205,7 @@ function substituteCharacters (event, mapping) {
 		for(let n=0; n<mapping.length; n++){
 			txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
 		};
-		
+		console.log(txt)
 		activeCell.values = [[txt]];
 		activeCell.format.autofitColumns();
 		
