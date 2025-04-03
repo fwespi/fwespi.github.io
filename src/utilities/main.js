@@ -164,7 +164,7 @@ function handleInput (e) {
 		option.innerHTML = x;
 		
 		option.onclick = () => {
-			if(Word) {
+			if(typeof Word !== 'undefined') {
 				Word.run( async context => {		
 					const selection = context.document.getSelection();
 					selection.insertText(option.firstChild.textContent, "Replace");
@@ -184,7 +184,7 @@ function handleInput (e) {
 }
 
 function substituteCharacters (event, mapping) {
-	if(Word) {
+	if(typeof Word !== 'undefined') {
 		Word.run( async context => {		
 			const selection = context.document.getSelection();
 			context.load(selection, "text");
@@ -198,7 +198,7 @@ function substituteCharacters (event, mapping) {
 			await context.sync();
 		})
 		
-	} else if(Excel) {
+	} else if(typeof Excel !== 'undefined') {
 		Excel.run( async context => {		
 			const activeCell = context.workbook.getActiveCell();
 			activeCell.load("text");
