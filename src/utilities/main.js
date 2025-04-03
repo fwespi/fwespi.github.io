@@ -182,6 +182,8 @@ function handleInput (e) {
 }
 
 function substituteCharacters (event, mapping) {
+	console.log(Word)
+	console.log(Excel)
 	Word.run( async context => {		
 		const selection = context.document.getSelection();
 		context.load(selection, "text");
@@ -194,7 +196,7 @@ function substituteCharacters (event, mapping) {
 		selection.insertText(txt, "replace");
 		await context.sync();
 	});
-	console.log(Excel)
+	
 	Excel.run( async context => {		
 		const activeCell = context.workbook.getActiveCell();
 		activeCell.load("text");
