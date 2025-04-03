@@ -202,14 +202,12 @@ function substituteCharacters (event, mapping) {
 		Excel.run( async context => {		
 			const activeCell = context.workbook.getActiveCell();
 			activeCell.load("text");
-		console.log(activeCell)
 			await context.sync();
 				
-			let txt = activeCell.text;
+			let txt = activeCell.text[0];
 			for(let n=0; n<mapping.length; n++){
 				txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
 			};
-			console.log(txt)
 			activeCell.values = [[txt]];
 			activeCell.format.autofitColumns();
 			
