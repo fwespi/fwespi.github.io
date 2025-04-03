@@ -194,11 +194,11 @@ function substituteCharacters (event, mapping) {
 		selection.insertText(txt, "replace");
 		await context.sync();
 	});
-	
+	console.log(Excel)
 	Excel.run( async context => {		
 		const activeCell = context.workbook.getActiveCell();
 		activeCell.load("text");
-	
+	console.log(activeCell)
 		await context.sync();
 			
 		let txt = activeCell.text;
