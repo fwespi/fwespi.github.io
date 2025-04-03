@@ -204,9 +204,7 @@ function substituteCharacters (event, mapping) {
 			activeCell.load("text");
 			await context.sync();
 				
-			let txt = activeCell.text[0];
-			console.log(activeCell.text)
-			console.log(txt)
+			let txt = activeCell.text[0][0];
 			for(let n=0; n<mapping.length; n++){
 				txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
 			};
