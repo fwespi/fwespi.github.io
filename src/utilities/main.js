@@ -164,15 +164,17 @@ function handleInput (e) {
 		option.innerHTML = x;
 		
 		option.onclick = () => {
-			Word.run( async context => {		
-				const selection = context.document.getSelection();
-				selection.insertText(option.firstChild.textContent, "Replace");
-				selection.select("End");
-				await context.sync();
-				input.value = "";
-				wrapper.innerHTML = "";
-			});
-			
+			if(Word) {
+				Word.run( async context => {		
+					const selection = context.document.getSelection();
+					selection.insertText(option.firstChild.textContent, "Replace");
+					selection.select("End");
+					await context.sync();
+					input.value = "";
+					wrapper.innerHTML = "";
+				});
+			}
+				
 		}
 	})
 	
@@ -182,37 +184,38 @@ function handleInput (e) {
 }
 
 function substituteCharacters (event, mapping) {
-	console.log(Word)
-	console.log(Excel)
-	Word.run( async context => {		
-		const selection = context.document.getSelection();
-		context.load(selection, "text");
-		await context.sync();
-			
-		let txt = selection.text;
-		for(let n=0; n<mapping.length; n++){
-			txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
-		};
-		selection.insertText(txt, "replace");
-		await context.sync();
-	});
-	
-	Excel.run( async context => {		
-		const activeCell = context.workbook.getActiveCell();
-		activeCell.load("text");
-	console.log(activeCell)
-		await context.sync();
-			
-		let txt = activeCell.text;
-		for(let n=0; n<mapping.length; n++){
-			txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
-		};
-		console.log(txt)
-		activeCell.values = [[txt]];
-		activeCell.format.autofitColumns();
+	if(Word) {
+		Word.run( async context => {		
+			const selection = context.document.getSelection();
+			context.load(selection, "text");
+			await context.sync();
+				
+			let txt = selection.text;
+			for(let n=0; n<mapping.length; n++){
+				txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
+			};
+			selection.insertText(txt, "replace");
+			await context.sync();
+		})
 		
-		await context.sync();
-	});
+	} else if(Excel) {
+		Excel.run( async context => {		
+			const activeCell = context.workbook.getActiveCell();
+			activeCell.load("text");
+		console.log(activeCell)
+			await context.sync();
+				
+			let txt = activeCell.text;
+			for(let n=0; n<mapping.length; n++){
+				txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
+			};
+			console.log(txt)
+			activeCell.values = [[txt]];
+			activeCell.format.autofitColumns();
+			
+			await context.sync();
+		});
+	}
 	
 	if(event)
 		event.completed();
