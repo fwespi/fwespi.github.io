@@ -172,6 +172,7 @@ function handleInput (e) {
 				input.value = "";
 				wrapper.innerHTML = "";
 			});
+			
 		}
 	})
 	
@@ -191,6 +192,25 @@ function substituteCharacters (event, mapping) {
 			txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
 		};
 		selection.insertText(txt, "replace");
+		await context.sync();
+	});
+	
+	Excel.run( async context => {		
+		const activeCell = context.workbook.getActiveCell();
+		//const selectedRange = context.workbook.getSelectedRange();
+		
+		activeCell.load("text");
+	
+		await context.sync();
+			
+		let txt = activeCell.text;
+		for(let n=0; n<mapping.length; n++){
+			txt = txt.replaceAll(mapping[n][0], mapping[n][1]);
+		};
+		
+		activeCell.values = [[txt]];
+		activeCell.format.autofitColumns();
+		
 		await context.sync();
 	});
 	
